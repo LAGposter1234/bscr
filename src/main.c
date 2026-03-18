@@ -4,8 +4,6 @@
 
 #define WIDTH 800
 #define HEIGHT 600
-#define MEM_SIZE (512 * 1024 * 1024)
-#define FB_OFFSET (MEM_SIZE - WIDTH * HEIGHT * 3)
 
 #include "program.h"
 
@@ -17,8 +15,8 @@ int main() {
 
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Window *win = SDL_CreateWindow("bscr", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
-	SDL_Renderer *ren = SDL_CreateRenderer(win, -1, 0);
-	SDL_Texture *tex = SDL_CreateTexture(ren, NULL, SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
+	SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_PRESENTVSYNC);
+	SDL_Texture *tex = SDL_CreateTexture(ren, SDL_PIXELFORMAT_RGB24, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 
 	init(mem);
 
